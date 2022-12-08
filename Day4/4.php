@@ -26,9 +26,6 @@ foreach($input as $line) {
 		) {
 		$overlaps++;
 	}
-
-	//if array_intersect($pair1, $pair2));
-	//die();
 }
 
 echo "Part1 - $fullyContains \n";
