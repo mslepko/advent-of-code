@@ -49,18 +49,15 @@ $gridRows = count(array_keys($grid));
 for ($j=1; $j<$gridColumns-1; $j++) {
 	for($k=1; $k<$gridRows-1; $k++) {
 		$treeSize = $grid[$j][$k];
-		//echo "$j x $k = $treeSize\n";
-		//echo "Tree size: $treeSize\n";
+
 		//checking from tree to top
 		$maxHeightTop = getTreesHeight($j-1, 0, $k, false);
-		//echo "Max to top: $maxHeightTop\n";
 		if ($treeSize > $maxHeightTop) {
 			$visible++;
 			continue;
 		}
 		// // from tree to bottom
 		$maxHeightBottom = getTreesHeight($j+1, $gridRows, $k, true);
-		//echo "Max to bottom: $maxHeightBottom\n";
 		if ($treeSize > $maxHeightBottom) {
 			$visible++;
 			continue;
@@ -68,7 +65,6 @@ for ($j=1; $j<$gridColumns-1; $j++) {
 
 		//from tree to left
 		$maxHeightLeft = getTreesHeight($k-1, 0, $j, false, true);
-		//echo "Max to left: $maxHeightLeft\n";
 		if ($treeSize > $maxHeightLeft) {
 			$visible++;
 			continue;
@@ -76,7 +72,6 @@ for ($j=1; $j<$gridColumns-1; $j++) {
 
 		// from tree to right
 		$maxHeightRight = getTreesHeight($k+1, $gridColumns, $j, true, true);
-		//echo "Max to right: $maxHeightRight\n";
 		if ($treeSize > $maxHeightRight) {
 			$visible++;
 			continue;
@@ -84,7 +79,7 @@ for ($j=1; $j<$gridColumns-1; $j++) {
 	}
 }
 
-echo "Part: $visible trees are visible\n";
+echo "Part1: $visible trees are visible\n";
 
 // Part2
 function getTreesCount($treeHeight, $start, $stop, $col, 
@@ -101,7 +96,6 @@ function getTreesCount($treeHeight, $start, $stop, $col,
 		} else {
 			$height = intval($grid[$start][$col]);
 		}
-		//echo "Z: $start = k: $col = $height\n";
 		if ($height >= $treeHeight) {
 			$sees++;
 			break;
@@ -122,8 +116,6 @@ for ($j=1; $j<$gridColumns-1; $j++) {
 		$seeLeft = getTreesCount($treeSize, $k-1, 0, $j, false, true);
 		$seeRight = getTreesCount($treeSize, $k+1, $gridColumns, $j, true, true);
 
-		//echo "Tree: $treeSize\n";
-		//echo "Top: $seeTop - B: $seeBottom - L: $seeLeft - R: $seeRight\n";
 		array_push($scenic, ($seeTop * $seeBottom * $seeLeft * $seeRight));
 	}
 }
